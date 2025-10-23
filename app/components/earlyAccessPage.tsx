@@ -9,6 +9,7 @@ import { crateInjectiveIfNotExists } from "../services/userMessage";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { AddSomniaNetworkGuide } from "./AddSomniaNetworkGuide";
 
 interface EarlyAccessPageProps {
   injectiveAddress: string | null;
@@ -25,6 +26,7 @@ const EarlyAccessPage = ({
 }: EarlyAccessPageProps) => {
   const [referralCode, setReferralCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showNetworkGuide, setShowNetworkGuide] = useState<boolean>(false);
 
   const checkIsWhitelisted = useCallback(async () => {
     try {
@@ -58,6 +60,7 @@ const EarlyAccessPage = ({
 
       if (address) {
         setWalletAddress(address);
+        setShowNetworkGuide(false);
         toast.success("Wallet Connected!", {
           position: "top-right",
           autoClose: 3000,
@@ -68,6 +71,9 @@ const EarlyAccessPage = ({
           progress: undefined,
           theme: "colored",
         });
+      } else {
+        // Show network guide if connection failed
+        setShowNetworkGuide(true);
       }
       if (token) {
         localStorage.setItem("token", token);
@@ -76,9 +82,10 @@ const EarlyAccessPage = ({
       }
     } catch (error) {
       console.error("Error connecting wallet:", error);
-      toast.error("Login failed.", {
+      setShowNetworkGuide(true);
+      toast.error("Connection issue. Please try adding the network manually.", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -142,6 +149,11 @@ const EarlyAccessPage = ({
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <ToastContainer />
+      {showNetworkGuide ? (
+        <div className="w-full max-w-2xl">
+          <AddSomniaNetworkGuide onClose={() => setShowNetworkGuide(false)} />
+        </div>
+      ) : (
       <Card className="w-full max-w-md bg-zinc-900 border-zinc-800 text-zinc-100 ">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-600 bg-clip-text text-transparent">
@@ -171,6 +183,7 @@ const EarlyAccessPage = ({
           )}
         </CardContent>
       </Card>
+      )}
     </div>
   );
 };

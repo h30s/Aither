@@ -68,6 +68,12 @@ export async function addSomniaNetwork(): Promise<{ success: boolean; error?: st
   try {
     const ethereum = (window as { ethereum: { request: (args: { method: string; params: unknown[] }) => Promise<void> } }).ethereum;
     
+    console.log('Adding Somnia network with config:', {
+      chainId: SOMNIA_TESTNET.chainIdHex,
+      chainName: SOMNIA_TESTNET.chainName,
+      rpcUrls: SOMNIA_TESTNET.rpcUrls,
+    });
+
     await ethereum.request({
       method: 'wallet_addEthereumChain',
       params: [
@@ -84,9 +90,18 @@ export async function addSomniaNetwork(): Promise<{ success: boolean; error?: st
     return { success: true };
   } catch (error: unknown) {
     console.error('Error adding Somnia network:', error);
+    
+    // User rejected the request
+    if (error && typeof error === 'object' && 'code' in error && error.code === 4001) {
+      return { 
+        success: false, 
+        error: 'User rejected the network addition request'
+      };
+    }
+    
     return { 
       success: false, 
-      error: error instanceof Error ? error.message : 'Failed to add network'
+      error: error instanceof Error ? error.message : 'Failed to add network. The RPC might be temporarily unavailable.'
     };
   }
 }
@@ -125,7 +140,7 @@ export async function switchToSomniaNetwork(): Promise<{ success: boolean; error
 }
 
 /**
- * Connect wallet and ensure Somnia network
+ * Connect wallet and ensure Somnia network (allows proceeding even if network addition fails)
  */
 export async function connectWalletToSomnia(): Promise<{
   success: boolean;
@@ -143,7 +158,7 @@ export async function connectWalletToSomnia(): Promise<{
   try {
     const ethereum = (window as { ethereum: { request: (args: { method: string }) => Promise<string[]> } }).ethereum;
 
-    // Request account access
+    // Request account access first
     const accounts = await ethereum.request({ 
       method: 'eth_requestAccounts' 
     });
@@ -160,9 +175,12 @@ export async function connectWalletToSomnia(): Promise<{
       const switchResult = await switchToSomniaNetwork();
       
       if (!switchResult.success) {
+        // Return partial success - wallet connected but wrong network
+        console.warn('Could not switch to Somnia network:', switchResult.error);
         return { 
           success: false, 
-          error: 'Please switch to Somnia Testnet to continue' 
+          error: `Connected to MetaMask but failed to add/switch to Somnia network. ${switchResult.error || 'Please add it manually or click Accept in MetaMask.'}`,
+          address: accounts[0]
         };
       }
     }
@@ -177,6 +195,15 @@ export async function connectWalletToSomnia(): Promise<{
     };
   } catch (error: unknown) {
     console.error('Error connecting wallet:', error);
+    
+    // User rejected
+    if (error && typeof error === 'object' && 'code' in error && error.code === 4001) {
+      return { 
+        success: false, 
+        error: 'User rejected the connection request'
+      };
+    }
+    
     return { 
       success: false, 
       error: error instanceof Error ? error.message : 'Failed to connect wallet'
