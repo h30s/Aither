@@ -1,0 +1,64 @@
+{
+  "name": "@aither-somnia/agent-sdk",
+  "version": "1.0.0",
+  "description": "Extensible SDK for building AI agents on Somnia blockchain",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "dev": "tsup index.ts --format cjs,esm --dts --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "defi",
+    "somnia",
+    "blockchain",
+    "web3",
+    "ethereum",
+    "smart-contracts",
+    "llm",
+    "natural-language"
+  ],
+  "author": "Aither Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aither-somnia/aither-somnia.git",
+    "directory": "sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/aither-somnia/aither-somnia/issues"
+  },
+  "homepage": "https://github.com/aither-somnia/aither-somnia#readme",
+  "peerDependencies": {
+    "ethers": "^6.0.0"
+  },
+  "dependencies": {
+    "openai": "^4.82.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "aither-somnia-contracts",
+  "version": "1.0.0",
+  "description": "Smart contracts for Aither-Somnia AI copilot",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:somnia": "hardhat run scripts/deploy.js --network somnia",
+    "verify": "hardhat verify --network somnia"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "hardhat": "^2.19.4"
+  }
+}
