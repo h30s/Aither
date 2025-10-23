@@ -42,7 +42,7 @@ const Header = ({
       >
         <div className="flex h-14 items-center justify-between px-6">
           <div className="flex items-center gap-4">
-            <h2 className="text-lg font-semibold text-zinc-200">JECTA</h2>
+            <h2 className="text-lg font-semibold text-zinc-200">Aither</h2>
             {isWhitelisted && (
               <span className="rounded-full bg-blue-500/10 px-2 py-1 text-xs font-medium text-blue-500">
               Early Access
@@ -113,7 +113,7 @@ const Header = ({
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 border-b border-zinc-800 bg-zinc-900/95 backdrop-blur-sm">
         <div className="flex h-14 items-center justify-between px-4">
           <div className="w-8" /> 
-          <h2 className="text-lg font-semibold text-zinc-200">JECTA Chat</h2>
+          <h2 className="text-lg font-semibold text-zinc-200">Aither</h2>
           <div className="flex items-center">
             {injectiveAddress && (
               <Button

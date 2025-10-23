@@ -71,7 +71,7 @@ const ChatInput = ({ loading, onSubmit, disableSend, isEmptyState }: ChatInputPr
             className="text-center mb-6 sm:mb-8"
           >
             <h1 className="text-2xl mt-4  sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-white via-white to-zinc-500 bg-clip-text text-transparent">
-              Welcome to JECTA
+              Welcome to Aither
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-zinc-400">
               Your AI assistant for the Injective ecosystem
@@ -89,7 +89,7 @@ const ChatInput = ({ loading, onSubmit, disableSend, isEmptyState }: ChatInputPr
                 name="userMessage"
                 rows={1}
                 className="w-full bg-black/40 backdrop-blur-sm rounded-2xl px-6 py-4 pr-14 leading-relaxed resize-none focus:outline-none border border-zinc-800/50 hover:border-zinc-700/50 focus:border-zinc-600 text-zinc-100 placeholder:text-zinc-600 transition-all duration-200 text-base shadow-lg"
-                placeholder="Ask Jecta..."
+                placeholder="Ask Aither..."
                 style={{
                   minHeight: "56px",
                   maxHeight: "200px",
@@ -139,7 +139,7 @@ const ChatInput = ({ loading, onSubmit, disableSend, isEmptyState }: ChatInputPr
               name="userMessage"
               rows={1}
               className="w-full bg-black/40 backdrop-blur-sm rounded-2xl px-6 py-4 pr-14 resize-none focus:outline-none border border-zinc-600/50 hover:border-zinc-400/50 focus:border-zinc-600 text-zinc-100 placeholder:text-zinc-600 transition-all duration-200 shadow-lg"
-              placeholder="Message JECTA..."
+              placeholder="Message Aither..."
               style={{
                 minHeight: "56px",
                 maxHeight: "200px",

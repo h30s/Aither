@@ -3,7 +3,6 @@ import { createTitleFromMessage } from "@/ai/titleManager";
 import { fetchWithAuth } from "@/lib/fetch";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000"; // Default to localhost if not set
-const getAuthToken = () => localStorage.getItem("token");
 
 export const createChatIfNotExists = async ({
   injectiveAddress,

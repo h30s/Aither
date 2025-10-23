@@ -26,10 +26,34 @@ export interface SendDetails {
 export interface ContractInput {
   address: string;
   executeMsg: {
-    send?: any;
-    execute_routes?: any;
+    send?: Record<string, unknown>;
+    execute_routes?: Record<string, unknown>;
   };
-  funds?: any;
+  funds?: { denom: string; amount: string }[];
+}
+
+export interface TokenMetadata {
+  symbol: string;
+  name: string;
+  decimals: number;
+  totalSupply?: string;
+  [key: string]: unknown;
+}
+
+export interface PieChartData {
+  [key: string]: unknown;
+}
+
+export interface LlamaData {
+  [key: string]: unknown;
+}
+
+export interface StakeInfo {
+  [key: string]: unknown;
+}
+
+export interface Proposal {
+  [key: string]: unknown;
 }
 
 export interface ChatMessage {
@@ -41,9 +65,9 @@ export interface ChatMessage {
   validators?: Validator[] | null;
   contractInput?: ContractInput | null;
   send?: SendDetails | null;
-  token_metadata?:any;
-  pie?:any;
-  llama?:any;
-  stake_info?:any;
-  proposals?:any;
+  token_metadata?: TokenMetadata;
+  pie?: PieChartData;
+  llama?: LlamaData;
+  stake_info?: StakeInfo;
+  proposals?: Proposal[];
 }

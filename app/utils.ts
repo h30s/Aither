@@ -1,7 +1,5 @@
-import { MsgBroadcaster, WalletStrategy, type Wallet } from "@injectivelabs/wallet-ts";
 import type { ChatMessage } from "./types";
-import { ChainId } from "@injectivelabs/ts-types";
-import { Network } from "@injectivelabs/networks";
+import { ethers } from "ethers";
 
 export const createChatMessage = ({
   sender,
@@ -35,28 +33,21 @@ export const createChatMessage = ({
   };
 };
 
-// Dynamic Wallet Strategy Setup
-let walletStrategy: WalletStrategy | null = null;
-
-export const configureWalletStrategy = (wallet: Wallet) => {
-  walletStrategy = new WalletStrategy({
-    chainId: ChainId.Mainnet,
-    wallet: wallet,
-  });
-  walletStrategy.setWallet(wallet);
-  return walletStrategy;
-};
-
-export const getWalletStrategy = () => {
-  if (!walletStrategy) {
-    throw new Error("WalletStrategy is not initialized. Call configureWalletStrategy first.");
+// Somnia/Ethereum provider utilities
+export const getEthereumProvider = (): ethers.BrowserProvider | null => {
+  if (typeof window === 'undefined' || !(window as { ethereum?: unknown }).ethereum) {
+    return null;
   }
-  return walletStrategy;
+  return new ethers.BrowserProvider((window as { ethereum: unknown }).ethereum);
 };
 
-export const msgBroadcastClient = () => {
-  return new MsgBroadcaster({
-    walletStrategy: getWalletStrategy(),
-    network: Network.Mainnet,
-  });
+export const getSigner = async (): Promise<ethers.Signer | null> => {
+  const provider = getEthereumProvider();
+  if (!provider) return null;
+  try {
+    return await provider.getSigner();
+  } catch (error) {
+    console.error("Error getting signer:", error);
+    return null;
+  }
 };

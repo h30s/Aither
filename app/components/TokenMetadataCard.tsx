@@ -1,6 +1,21 @@
 import React from "react";
+import { TokenMetadata } from "../types";
 
-const TokenMetadataCard: React.FC<{ msg: any }> = ({ msg }) => {
+interface TokenMetadataMessage {
+  type: string;
+  token_metadata: TokenMetadata & {
+    name: string;
+    symbol: string;
+    supply: number;
+    logo: string;
+    holder_amount: number;
+    price: string;
+    token_type: string;
+    contract: string;
+  };
+}
+
+const TokenMetadataCard: React.FC<{ msg: TokenMetadataMessage }> = ({ msg }) => {
   if (msg.type !== "tokenmetadata") return null;
 
   const { name, symbol, supply, logo, holder_amount, price, token_type, contract } = msg.token_metadata;

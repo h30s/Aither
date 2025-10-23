@@ -89,7 +89,7 @@ export function TwoFactorModal({
         setCode(['', '', '', '', '', '']);
         document.getElementById('2fa-0')?.focus();
       }
-    } catch (err) {
+    } catch {
       setError('Verification failed. Please try again.');
     } finally {
       setIsVerifying(false);

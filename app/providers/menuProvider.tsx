@@ -11,7 +11,10 @@ const MenuProvider = ({ children }: { children: React.ReactNode }) => {
 
 const MenuContext = createContext({
   isCollapsed: false,
-  setIsCollapsed: (collapsed: boolean) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setIsCollapsed: (_collapsed: boolean) => {
+    // Placeholder function
+  },
 });
 
 export const useMenu = () => {

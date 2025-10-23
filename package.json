@@ -6,16 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "echo \"No tests configured yet. Add Jest or Vitest to enable testing.\" && exit 0",
+    "test:integration": "echo \"No integration tests configured yet. Add your test framework to enable testing.\" && exit 0"
   },
   "dependencies": {
-    "@cosmjs/launchpad": "^0.27.1",
     "@ethersproject/providers": "^5.7.2",
-    "@injectivelabs/sdk-ts": "^1.14.40",
-    "@injectivelabs/wallet-ts": "^1.14.40",
-    "@keplr-wallet/cosmos": "^0.12.190",
-    "@keplr-wallet/provider-extension": "^0.12.190",
     "@ledgerhq/hw-app-eth": "^6.42.5",
+    "ethers": "^6.13.0",
     "@radix-ui/react-collapsible": "^1.1.3",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-scroll-area": "^1.2.3",

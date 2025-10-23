@@ -1,44 +1,34 @@
-import { ChainId } from "@injectivelabs/ts-types";
+import { connectWalletToSomnia } from "@/lib/somnia-wallet";
 
 export const connectWallet = async (addToChat: (msg: any) => void) => {
-  if (!window.keplr) {
-    alert("Keplr Wallet is not installed. Please install it and try again.");
-    return;
-  }
-
   try {
-    await window.keplr.disable(ChainId.Mainnet);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    await window.keplr.enable(ChainId.Mainnet);
+    const result = await connectWalletToSomnia();
 
-    const keplrOfflineSigner = window.keplr.getOfflineSigner(ChainId.Mainnet);
-    const accounts = await keplrOfflineSigner.getAccounts();
-
-    if (!accounts.length) {
-      alert("No Injective accounts found in Keplr.");
+    if (!result.success || !result.address) {
+      alert(result.error || "Failed to connect MetaMask wallet. Please try again.");
       return;
     }
 
-    const injectiveAddress = accounts[0].address;
+    const walletAddress = result.address;
     const res = await fetch("/api/db", {
       method: "POST",
-      body: JSON.stringify({ type: "createInjective", injectiveAddress }),
+      body: JSON.stringify({ type: "createSomnia", walletAddress }),
     });
 
-    localStorage.setItem("injectiveAddress", injectiveAddress);
+    localStorage.setItem("walletAddress", walletAddress);
 
-    alert(`Connected! Your Injective address is: ${injectiveAddress}`);
+    alert(`Connected! Your Somnia address is: ${walletAddress}`);
 
     addToChat({
       sender: "system",
-      text: `User's Injective wallet address is: ${injectiveAddress}. If user asks you about his wallet address, you need to remember it.`,
+      text: `User's Somnia wallet address is: ${walletAddress}. If user asks you about their wallet address, you need to remember it.`,
       type: "text",
       intent: "general",
     });
 
-    return injectiveAddress;
+    return walletAddress;
   } catch (error) {
-    console.error("Error connecting to Keplr:", error);
-    alert("Failed to connect Keplr wallet. Please try again.");
+    console.error("Error connecting to MetaMask:", error);
+    alert("Failed to connect MetaMask wallet. Please try again.");
   }
 };

@@ -5,7 +5,7 @@ import { ValidatorProvider } from "./providers/validatorProvider";
 import MenuProvider from "./providers/menuProvider";
 import { Analytics } from "@vercel/analytics/react";
 export const metadata: Metadata = {
-  title: "Jecta",
+  title: "Aither",
   description: "First open-source AI copilot built on Injective Blockchain",
 };
 

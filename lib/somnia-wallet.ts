@@ -30,7 +30,7 @@ export const SOMNIA_TESTNET: SomniaNetwork = {
  * Check if MetaMask is installed
  */
 export function isMetaMaskInstalled(): boolean {
-  return typeof window !== 'undefined' && typeof (window as any).ethereum !== 'undefined';
+  return typeof window !== 'undefined' && typeof (window as { ethereum?: unknown }).ethereum !== 'undefined';
 }
 
 /**
@@ -40,7 +40,7 @@ export async function getCurrentChainId(): Promise<string | null> {
   if (!isMetaMaskInstalled()) return null;
   
   try {
-    const ethereum = (window as any).ethereum;
+    const ethereum = (window as { ethereum: { request: (args: { method: string }) => Promise<string> } }).ethereum;
     const chainId = await ethereum.request({ method: 'eth_chainId' });
     return chainId;
   } catch (error) {
@@ -66,7 +66,7 @@ export async function addSomniaNetwork(): Promise<{ success: boolean; error?: st
   }
 
   try {
-    const ethereum = (window as any).ethereum;
+    const ethereum = (window as { ethereum: { request: (args: { method: string; params: unknown[] }) => Promise<void> } }).ethereum;
     
     await ethereum.request({
       method: 'wallet_addEthereumChain',
@@ -82,11 +82,11 @@ export async function addSomniaNetwork(): Promise<{ success: boolean; error?: st
     });
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error adding Somnia network:', error);
     return { 
       success: false, 
-      error: error.message || 'Failed to add network' 
+      error: error instanceof Error ? error.message : 'Failed to add network'
     };
   }
 }
@@ -100,7 +100,7 @@ export async function switchToSomniaNetwork(): Promise<{ success: boolean; error
   }
 
   try {
-    const ethereum = (window as any).ethereum;
+    const ethereum = (window as { ethereum: { request: (args: { method: string; params: unknown[] }) => Promise<void> } }).ethereum;
     
     // Try to switch to Somnia network
     await ethereum.request({
@@ -109,9 +109,9 @@ export async function switchToSomniaNetwork(): Promise<{ success: boolean; error
     });
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     // This error code indicates that the chain has not been added to MetaMask
-    if (error.code === 4902) {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 4902) {
       // Try to add the network
       return await addSomniaNetwork();
     }
@@ -119,7 +119,7 @@ export async function switchToSomniaNetwork(): Promise<{ success: boolean; error
     console.error('Error switching to Somnia network:', error);
     return { 
       success: false, 
-      error: error.message || 'Failed to switch network' 
+      error: error instanceof Error ? error.message : 'Failed to switch network'
     };
   }
 }
@@ -141,7 +141,7 @@ export async function connectWalletToSomnia(): Promise<{
   }
 
   try {
-    const ethereum = (window as any).ethereum;
+    const ethereum = (window as { ethereum: { request: (args: { method: string }) => Promise<string[]> } }).ethereum;
 
     // Request account access
     const accounts = await ethereum.request({ 
@@ -175,11 +175,11 @@ export async function connectWalletToSomnia(): Promise<{
       address: accounts[0],
       provider,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error connecting wallet:', error);
     return { 
       success: false, 
-      error: error.message || 'Failed to connect wallet' 
+      error: error instanceof Error ? error.message : 'Failed to connect wallet'
     };
   }
 }
@@ -192,7 +192,7 @@ export async function getWalletBalance(
   provider?: ethers.BrowserProvider
 ): Promise<{ balance: string; balanceFormatted: string } | null> {
   try {
-    const ethProvider = provider || new ethers.BrowserProvider((window as any).ethereum);
+    const ethProvider = provider || new ethers.BrowserProvider((window as { ethereum: unknown }).ethereum);
     const balance = await ethProvider.getBalance(address);
     const balanceFormatted = ethers.formatEther(balance);
 
@@ -212,7 +212,7 @@ export async function getWalletBalance(
 export function onAccountsChanged(callback: (accounts: string[]) => void): () => void {
   if (!isMetaMaskInstalled()) return () => {};
 
-  const ethereum = (window as any).ethereum;
+  const ethereum = (window as { ethereum: { on: (event: string, callback: (accounts: string[]) => void) => void; removeListener: (event: string, callback: (accounts: string[]) => void) => void } }).ethereum;
   ethereum.on('accountsChanged', callback);
 
   // Return cleanup function
@@ -227,7 +227,7 @@ export function onAccountsChanged(callback: (accounts: string[]) => void): () =>
 export function onChainChanged(callback: (chainId: string) => void): () => void {
   if (!isMetaMaskInstalled()) return () => {};
 
-  const ethereum = (window as any).ethereum;
+  const ethereum = (window as { ethereum: { on: (event: string, callback: (chainId: string) => void) => void; removeListener: (event: string, callback: (chainId: string) => void) => void } }).ethereum;
   ethereum.on('chainChanged', callback);
 
   // Return cleanup function
@@ -282,7 +282,7 @@ export function getExplorerUrl(txHash: string, type: 'tx' | 'address' = 'tx'): s
 /**
  * Request STT tokens from faucet (if available)
  */
-export async function requestFaucetTokens(address: string): Promise<{
+export async function requestFaucetTokens(): Promise<{
   success: boolean;
   message: string;
   txHash?: string;
@@ -294,7 +294,7 @@ export async function requestFaucetTokens(address: string): Promise<{
       success: false,
       message: 'Please request STT tokens from the Somnia faucet: https://faucet.somnia.network',
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: 'Failed to request faucet tokens',

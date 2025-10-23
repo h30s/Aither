@@ -1,72 +1,76 @@
-import type { Wallet } from "@injectivelabs/wallet-ts";
-import { configureWalletStrategy, getWalletStrategy } from "@/app/utils";
+import { connectWalletToSomnia, isMetaMaskInstalled } from "@/lib/somnia-wallet";
+import { ethers } from "ethers";
 
-export const connectToWallet = async (
-  wallet: Wallet
-): Promise<{ address: string | null; wallet: Wallet; token: string | null }> => {
+export const connectToWallet = async (): Promise<{ 
+  address: string | null; 
+  wallet: string; 
+  token: string | null 
+}> => {
   try {
-    configureWalletStrategy(wallet);
-
-    const walletStrategy = getWalletStrategy();
-    const addresses = await walletStrategy.getAddresses();
-    const pubkey = await walletStrategy.getPubKey(addresses[0]);
-
-    if (addresses.length === 0) {
-      console.error("No addresses found.");
-      return { address: null, wallet: wallet, token: null };
+    if (!isMetaMaskInstalled()) {
+      console.error("MetaMask is not installed.");
+      return { address: null, wallet: "metamask", token: null };
     }
 
+    const result = await connectWalletToSomnia();
+
+    if (!result.success || !result.address) {
+      console.error("Failed to connect wallet:", result.error);
+      return { address: null, wallet: "metamask", token: null };
+    }
+
+    const address = result.address;
+
+    // Check if user exists
     const res = await fetch("/api/users", {
       method: "GET",
-      headers: { "Content-Type": "application/json", injectiveAddress: addresses[0] },
+      headers: { "Content-Type": "application/json", walletAddress: address },
     });
 
     const userData = await res.json();
 
     if (userData.data == null) {
-      return { address: addresses[0], wallet: wallet, token: null };
+      return { address, wallet: "metamask", token: null };
     }
-    const nonce = await fetch("/api/auth/nonce", {
-      method: "POST",
-      body: JSON.stringify({ address: addresses[0] }),
-    });
-    const nonceData = await nonce.json();
 
-    const { status, token } = await signMessage(addresses[0], pubkey, nonceData.nonce);
+    // Get nonce for signing
+    const nonceRes = await fetch("/api/auth/nonce", {
+      method: "POST",
+      body: JSON.stringify({ address }),
+    });
+    const nonceData = await nonceRes.json();
+
+    // Sign message with MetaMask
+    const { status, token } = await signMessage(address, nonceData.nonce, result.provider);
 
     if (status === "success") {
-      return { address: addresses[0], wallet: wallet, token: token };
+      return { address, wallet: "metamask", token };
     }
 
-    return { address: null, wallet: wallet, token: null };
-    //TODO: Save user’s wallet address to chat history
-    /*
-    addToChat(createChatMessage({
-        sender: "sender",
-        text: ⁠ My Injective wallet address is: ${addresses[0]}. If user asks you about his wallet address, you need to remember it. ⁠,
-        type: "text",
-        intent: "general",
-      }));
-    */
+    return { address: null, wallet: "metamask", token: null };
   } catch (error) {
-    console.error(`Error connecting to ${wallet}:`, error);
-    return { address: null, wallet: wallet, token: null };
+    console.error(`Error connecting to MetaMask:`, error);
+    return { address: null, wallet: "metamask", token: null };
   }
 };
 
 const signMessage = async (
   address: string,
-  pubkey: string,
-  nonce: string
+  nonce: string,
+  provider?: ethers.BrowserProvider
 ): Promise<{ status: string; token: string | null }> => {
   try {
-    const walletStrategy = getWalletStrategy();
-    const signedMessage = await walletStrategy.signArbitrary(address, nonce);
+    const ethProvider = provider || new ethers.BrowserProvider((window as { ethereum: unknown }).ethereum);
+    const signer = await ethProvider.getSigner();
+    
+    // Sign the nonce message
+    const message = `Sign this message to authenticate with Aither-Somnia.\n\nNonce: ${nonce}`;
+    const signature = await signer.signMessage(message);
 
-    if (signedMessage) {
+    if (signature) {
       const res = await fetch("/api/auth/verifyArbitrary", {
         method: "POST",
-        body: JSON.stringify({ nonce, signature: signedMessage, pubkey, address }),
+        body: JSON.stringify({ nonce, signature, address }),
       });
       const { isValid, token } = await res.json();
 
@@ -77,6 +81,7 @@ const signMessage = async (
 
     return { status: "failed", token: null };
   } catch (error) {
-    throw new Error("Signing error", { cause: error });
+    console.error("Signing error:", error);
+    return { status: "failed", token: null };
   }
 };

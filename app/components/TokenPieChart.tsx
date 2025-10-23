@@ -19,7 +19,7 @@ const COLORS = [
 ];
 
 // Custom Center Label
-const CustomLabel = ({ viewBox }: any) => {
+const CustomLabel = ({ viewBox }: { viewBox: { cx: number; cy: number } }) => {
   const { cx, cy } = viewBox;
   return (
     <g>
@@ -37,7 +37,7 @@ const CustomLabel = ({ viewBox }: any) => {
   );
 };
 
-const CustomTooltip = ({ active, payload }: any) => {
+const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ payload: { payload: PieChartData }; value: number }> }) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-black bg-opacity-80 backdrop-blur-md text-white p-2 sm:p-3 rounded-lg shadow-lg border border-blue-400">

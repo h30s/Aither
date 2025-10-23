@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     .single();
 
   if (data) {
-    const { data: updatedData, error: updateError } = await supabase
+    await supabase
       .from("users")
       .update({
         nonce: nonce,
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         wallet_address: address,
       });
   } else {
-    const { data: newData, error: newError } = await supabase.from("users").insert({
+    await supabase.from("users").insert({
       wallet_address: address,
       nonce: nonce,
     });

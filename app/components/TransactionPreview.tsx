@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, CheckCircle2, Info, TrendingUp, Zap, Shield, ExternalLink } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Info, TrendingUp, Zap, Shield } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import type { SimulationResult } from '@/ai/agents/base';
 

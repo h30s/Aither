@@ -97,7 +97,7 @@ export function isValidSomniaAddress(address: string): boolean {
   return /^0x[a-fA-F0-9]{40}$/.test(address);
 }
 
-export function formatSomniaAmount(amount: string | number, decimals: number = 18): string {
+export function formatSomniaAmount(amount: string | number): string {
   const value = typeof amount === 'string' ? parseFloat(amount) : amount;
   if (value === 0) return '0';
   
@@ -115,16 +115,16 @@ export function formatSomniaAmount(amount: string | number, decimals: number = 1
 }
 
 // Network switching helper
-export async function switchToSomnia(ethereum: any) {
+export async function switchToSomnia(ethereum: { request: (args: { method: string; params: unknown[] }) => Promise<void> }) {
   try {
     await ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: `0x${SOMNIA_TESTNET.id.toString(16)}` }],
     });
     return true;
-  } catch (switchError: any) {
+  } catch (switchError: unknown) {
     // This error code indicates that the chain has not been added to MetaMask
-    if (switchError.code === 4902) {
+    if (switchError && typeof switchError === 'object' && 'code' in switchError && switchError.code === 4902) {
       try {
         await ethereum.request({
           method: 'wallet_addEthereumChain',

@@ -5,7 +5,6 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { AlertTriangle, CheckCircle, Info, TrendingUp, Zap } from "lucide-react";
 import { SimulationResult } from "@/ai/agents/base";
-import { getExplorerUrl } from "@/wallet/somniaConfig";
 
 interface TransactionPreviewCardProps {
   title: string;

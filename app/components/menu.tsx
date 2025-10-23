@@ -83,7 +83,7 @@ const Menu = ({
       }
     };
     fetchLastChatNames();
-  }, [isWhitelisted, newChatCreated]);
+  }, [isWhitelisted, newChatCreated, injectiveAddress, setAllChats]);
 
   useEffect(() => {
     const getRef = async () => {
@@ -114,10 +114,10 @@ const Menu = ({
     <div className="flex flex-col h-full ">
       <div className="space-y-6 p-4">
         <div className="flex items-center gap-2">
-          <img src="/logo.png" alt="Jecta" className="h-8 w-8" />
+          <img src="/logo.png" alt="Aither" className="h-8 w-8" />
           {!isCollapsed && (
             <div>
-              <h1 className="text-xl font-bold">JECTA</h1>
+              <h1 className="text-xl font-bold">Aither</h1>
               <span className="text-xs text-gray-400">v0.0.3</span>
             </div>
           )}

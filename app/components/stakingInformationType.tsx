@@ -57,9 +57,9 @@ const ValidatorList = ({
             );
 
       
-    } catch (error) {
-      
-    } 
+    } catch {
+      // Error handling can be added here if needed
+    }
   };
 
   return (
