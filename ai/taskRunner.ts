@@ -4,7 +4,7 @@ import { searchInjectiveNews } from "./tasks/searchInjectiveNews";
 import { fetchBalance } from "./tasks/fetchBalance";
 import { fetchPrice } from "./tasks/fetchPrice";
 import { searchTxHash } from "./tasks/searchTxHash";
-import { stakeInjective } from "./tasks/stakeInjective";
+import { stakeSomnia} from "./tasks/stakeInjective";
 import { transferFunds } from "./tasks/transferFunds";
 import { createChatMessage } from "@/app/utils";
 import { getAuction, getLatestAuction } from "./tasks/fetchAuction";
@@ -12,7 +12,7 @@ import { tokenAnalysis } from "./tasks/tokenAnalysis";
 import { jokeTool } from "./tasks/jokeTool";
 import { fetchMetrics } from "./tasks/fetchMetrics";
 import { fetchPortfolio } from "./tasks/fetchUserPortfolio";
-import { unstakeInjective } from "./tasks/unstakeInjective";
+import { unstakeSomnia} from "./tasks/unstakeInjective";
 import { fetchLastProposals } from "./tasks/fetchLastProposals";
 
 

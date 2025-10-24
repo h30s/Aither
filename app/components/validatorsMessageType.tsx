@@ -3,6 +3,7 @@ import { useChat } from "../providers/chatProvider";
 import { useValidator } from "../providers/validatorProvider";
 import type { Validator } from "../types";
 import { createChatMessage } from "../utils";
+import { isdiotsrhMode } from "../utils/diotsrhData";
 
 const ValidatorsMessageType = ({
   injectiveAddress,
@@ -28,6 +29,37 @@ const ValidatorsMessageType = ({
     validator: string
   ) => {
     try {
+      // diotsrh Mode: Simulate validator selection without API call
+      if (isdiotsrhMode()) {
+        await addMessage(
+          token,
+          createChatMessage({
+            sender: "ai",
+            text: `Great choice! You selected **${name}** validator.`,
+            type: "text",
+          })
+        );
+        
+        // Simulate a brief delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        await addMessage(
+          token,
+          createChatMessage({
+            sender: "ai",
+            text: `✅ Successfully staked 100 STT with ${name}!\n\n📊 **Staking Details:**\n• Validator: ${name}\n• Amount: 100 STT\n• Expected APR: 18.5%\n• Rewards: ~18.5 STT/year\n\nYour tokens are now earning rewards!`,
+            type: "success",
+          })
+        );
+        
+        setValidatorAddress(validator);
+        setValidatorSelected(true);
+        setLoadingState(null);
+        handleExit(); // Close the validator selection
+        return;
+      }
+      
+      // Real mode: Make actual API call
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" ,Authorization: token ? `Bearer ${token}` : "",},
@@ -86,7 +118,7 @@ const ValidatorsMessageType = ({
             ) => (
               <button
                 type="button"
-                key={validator.address}
+                key={validator.address || `validator-${index}`}
                 onClick={() => {
                   if (!validatorSelected) {
                     handleValidatorSelection(index, validator.moniker, validator.address);

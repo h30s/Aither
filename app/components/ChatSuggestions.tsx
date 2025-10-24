@@ -20,63 +20,63 @@ import { Button } from "./ui/button";
 
 const suggestions = [
   {
-    title: "Injective Basics",
+    title: "🌐 Somnia Basics",
     icon: <Rocket className="w-5 h-5" />,
-    description: "Learn the fundamentals",
+    description: "Learn about the blockchain",
     prompts: [
-      { text: "What is Injective?", icon: <Zap className="w-4 h-4" /> },
-      { text: "How do I get started with Injective?", icon: <ArrowRight className="w-4 h-4" /> },
-      { text: "What are the key features of Injective?", icon: <Code className="w-4 h-4" /> },
+      { text: "What is Somnia?", icon: <Zap className="w-4 h-4" /> },
+      { text: "How do I get started with Somnia?", icon: <ArrowRight className="w-4 h-4" /> },
+      { text: "What makes Somnia unique?", icon: <Code className="w-4 h-4" /> },
     ],
   },
   {
-    title: "Trading & DeFi",
-    icon: <LineChart className="w-5 h-5" />,
-    description: "Explore DeFi opportunities",
-    prompts: [
-      { text: "Swap 1 INJ to QUNT", icon: <Coins className="w-4 h-4" /> },
-      { text: "What is the current price of HDRO ?", icon: <Wallet className="w-4 h-4" /> },
-      { text: "I want to stake INJ.", icon: <Server className="w-4 h-4" /> },
-    ],
-  },
-  {
-    title: "Technical Insights",
-    icon: <MessageSquare className="w-5 h-5" />,
-    description: "Deep dive into Injective",
-    prompts: [
-      { text: "Explain me a tx by its own hash.", icon: <Server className="w-4 h-4" /> },
-      { text: "I want to see my own portfolio.", icon: <Zap className="w-4 h-4" /> },
-      { text: "Analyze SHROOM for me.", icon: <TrendingUp className="w-4 h-4" /> },
-    ],
-  },
-  {
-    title: "Governance & Auctions",
-    icon: <ShieldCheck className="w-5 h-5" />,
-    description: "Track proposals and bidding",
-    prompts: [
-      { text: "Show me the Injective governance proposals.", icon: <BookOpenCheck className="w-4 h-4" /> },
-      { text: "Get me the most recent Injective auction.", icon: <Zap className="w-4 h-4" /> },
-      { text: "Place a bid for me in the latest auction.", icon: <ArrowRight className="w-4 h-4" /> },
-    ],
-  },
-  {
-    title: "Advanced Wallet Tools",
+    title: "💼 Portfolio & Balance",
     icon: <Wallet className="w-5 h-5" />,
-    description: "Portfolio & token tracking",
+    description: "View your assets",
     prompts: [
-      { text: "Fetch my Injective portfolio.", icon: <Wallet className="w-4 h-4" /> },
-      { text: "Analyze the portfolio of this user.", icon: <Server className="w-4 h-4" /> },
-      { text: "Send 5 INJ to this wallet address.", icon: <ArrowRight className="w-4 h-4" /> },
+      { text: "Show my balance", icon: <Wallet className="w-4 h-4" /> },
+      { text: "Show my portfolio performance", icon: <TrendingUp className="w-4 h-4" /> },
+      { text: "What's my total portfolio value?", icon: <Coins className="w-4 h-4" /> },
     ],
   },
   {
-    title: "Ecosystem Metrics",
-    icon: <LineChart className="w-5 h-5" />,
-    description: "Track auctions, TVL, and governance",
+    title: "🎯 Staking & Rewards",
+    icon: <Server className="w-5 h-5" />,
+    description: "Earn passive income",
     prompts: [
-      { text: "Show me the total TVL of Injective.", icon: <TrendingUp className="w-4 h-4" /> },
-      { text: "Get me the most recent Injective auction.", icon: <Zap className="w-4 h-4" /> },
-      { text: "Show me the Injective governance proposals.", icon: <BookOpenCheck className="w-4 h-4" /> },
+      { text: "Stake 100 STT with the best validator", icon: <Server className="w-4 h-4" /> },
+      { text: "Show my staking positions", icon: <Zap className="w-4 h-4" /> },
+      { text: "How much can I earn by staking?", icon: <TrendingUp className="w-4 h-4" /> },
+    ],
+  },
+  {
+    title: "💱 Token Swaps",
+    icon: <LineChart className="w-5 h-5" />,
+    description: "Trade tokens easily",
+    prompts: [
+      { text: "Swap 1 ETH for STT with 1% slippage", icon: <Coins className="w-4 h-4" /> },
+      { text: "What is the current price of STT?", icon: <LineChart className="w-4 h-4" /> },
+      { text: "Show me token info for STT", icon: <MessageSquare className="w-4 h-4" /> },
+    ],
+  },
+  {
+    title: "🏛️ Governance",
+    icon: <ShieldCheck className="w-5 h-5" />,
+    description: "Participate in decisions",
+    prompts: [
+      { text: "Show governance proposals", icon: <BookOpenCheck className="w-4 h-4" /> },
+      { text: "What are the active proposals?", icon: <ShieldCheck className="w-4 h-4" /> },
+      { text: "How do I vote on proposals?", icon: <ArrowRight className="w-4 h-4" /> },
+    ],
+  },
+  {
+    title: "📊 Network Stats",
+    icon: <LineChart className="w-5 h-5" />,
+    description: "Track network metrics",
+    prompts: [
+      { text: "Show network metrics", icon: <TrendingUp className="w-4 h-4" /> },
+      { text: "What's the current TPS?", icon: <Zap className="w-4 h-4" /> },
+      { text: "Show Somnia network statistics", icon: <LineChart className="w-4 h-4" /> },
     ],
   },
 ];

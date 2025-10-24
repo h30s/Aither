@@ -5,7 +5,7 @@ export const fetchTokenPrice = async (ticker: string) => {
   const injectiveMainnetChainId = "injective-1";
       const tokenMetadata = await fetchTokenMetadata(ticker.toUpperCase());
       if (!tokenMetadata){
-        return `❌ Failed to fetch ${ticker.toUpperCase()} price. Metadata not found on Injective Token list.`;
+        return `❌ Failed to fetch ${ticker.toUpperCase()} price. Metadata not found on SomniaToken list.`;
       }
       if(ticker.toUpperCase() == "INJ"){
         const injPrice = await fetchINJPrice(injectiveMainnetChainId);

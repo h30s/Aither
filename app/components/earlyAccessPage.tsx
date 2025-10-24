@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { AddSomniaNetworkGuide } from "./AddSomniaNetworkGuide";
+import { isdiotsrhMode, getdiotsrhWalletAddress } from "../utils/diotsrhData";
 
 interface EarlyAccessPageProps {
   injectiveAddress: string | null;
@@ -29,8 +30,15 @@ const EarlyAccessPage = ({
   const [showNetworkGuide, setShowNetworkGuide] = useState<boolean>(false);
 
   const checkIsWhitelisted = useCallback(async () => {
+    // diotsrh Mode: Auto-whitelist IMMEDIATELY (synchronous check first)
+    if (isdiotsrhMode()) {
+      setIsWhitelisted(true);
+      return;
+    }
+    
     try {
       setIsLoading(true);
+      
       // Check whitelist via API for Somnia
       const response = await fetch("/api/whitelist/check", {
         method: "POST",
@@ -56,6 +64,32 @@ const EarlyAccessPage = ({
   const handleConnectWallet = async () => {
     try {
       setIsLoading(true);
+      
+      // diotsrh Mode: Skip real wallet connection
+      if (isdiotsrhMode()) {
+        const diotsrhAddress = getdiotsrhWalletAddress();
+        const diotsrhToken = "diotsrh-token-" + Date.now();
+        
+        setWalletAddress(diotsrhAddress);
+        localStorage.setItem("token", diotsrhToken);
+        setShowNetworkGuide(false);
+        
+        toast.success("🎬 diotsrh Mode: Wallet Connected!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        
+        setIsLoading(false);
+        return;
+      }
+      
+      // Real wallet connection
       const { address, token } = await connectToWallet();
 
       if (address) {
@@ -160,7 +194,7 @@ const EarlyAccessPage = ({
             Welcome to Aither
           </CardTitle>
           <CardDescription className="text-zinc-400">
-            Connect your wallet to get started
+            {isdiotsrhMode() ? "" : "Connect your wallet to get started"}
           </CardDescription>
         </CardHeader>
 

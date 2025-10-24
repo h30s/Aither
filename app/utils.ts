@@ -1,5 +1,27 @@
 import type { ChatMessage } from "./types";
 import { ethers } from "ethers";
+import { isdiotsrhMode } from "./utils/diotsrhData";
+
+// diotsrh mode stub for msgBroadcastClient
+export const msgBroadcastClient = () => {
+  if (isdiotsrhMode()) {
+    // Return a mock client for diotsrh mode
+    return {
+      broadcast: async ({ injectiveAddress, msgs }: { injectiveAddress: string; msgs: unknown }) => {
+        // Simulate a successful transaction
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return {
+          txHash: "0x" + Math.random().toString(16).substring(2, 66),
+          success: true
+        };
+      }
+    };
+  }
+  
+  // In production, this would return the real client
+  // You'll need to import and return your actual msgBroadcastClient implementation
+  throw new Error("msgBroadcastClient not implemented for production mode");
+};
 
 export const createChatMessage = ({
   sender,

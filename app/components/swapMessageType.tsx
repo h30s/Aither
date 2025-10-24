@@ -1,6 +1,7 @@
 import { MsgExecuteContractCompat } from "@injectivelabs/sdk-ts";
 import type { ChatMessage, ContractInput } from "../types";
 import { createChatMessage, msgBroadcastClient } from "../utils";
+import { isdiotsrhMode } from "../utils/diotsrhData";
 
 const SwapMessageType = ({
   text = "",
@@ -25,6 +26,29 @@ const SwapMessageType = ({
         return;
       }
       updateExecuting(true);
+      
+      // diotsrh Mode: Simulate swap without blockchain interaction
+      if (isdiotsrhMode()) {
+        // Simulate transaction delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        const mockTxHash = "0x" + Math.random().toString(16).substring(2, 66);
+        
+        updateChat((prevChat) => [
+          ...prevChat,
+          createChatMessage({
+            sender: "ai",
+            text: `✅ **Swap Successful!**\n\n📄 Transaction Hash: \`${mockTxHash}\`\n\n🔄 You swapped **${contractInput.amountIn || "1.0"} ${contractInput.tokenIn || "ETH"}** for **${contractInput.amountOut || "500.25"} ${contractInput.tokenOut || "STT"}**\n\n⭐ Price Impact: ${contractInput.priceImpact || "0.2%"}\n⛽ Gas Used: ${contractInput.estimatedGas || "0.002 ETH"}\n\nYour tokens have been successfully swapped!`,
+            type: "success",
+          }),
+        ]);
+        
+        updateExecuting(false);
+        handleExit(); // Close the swap dialog
+        return;
+      }
+      
+      // Real mode: Execute actual blockchain transaction
       if (contractInput.executeMsg.send !== undefined) {
         const msg = MsgExecuteContractCompat.fromJSON({
           sender: injectiveAddress,

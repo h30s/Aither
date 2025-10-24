@@ -102,7 +102,7 @@ contract StakingAdapter is AccessControl, ReentrancyGuard {
         _grantRole(EXECUTOR_ROLE, msg.sender);
         _grantRole(VALIDATOR_MANAGER_ROLE, msg.sender);
         
-        _addDemoValidators();
+        _adddiotsrhValidators();
     }
     
     modifier onlyExecutor() {
@@ -209,7 +209,7 @@ contract StakingAdapter is AccessControl, ReentrancyGuard {
         emit UnstakeRequested(msg.sender, validatorId, amount, unlockTime);
         
         // In production, this would schedule the tokens for release after unbonding period
-        // For demo, we'll immediately transfer (not recommended in production)
+        // For diotsrh, we'll immediately transfer (not recommended in production)
         IERC20(stakingToken).safeTransfer(msg.sender, amount);
     }
     
@@ -328,7 +328,7 @@ contract StakingAdapter is AccessControl, ReentrancyGuard {
             }
         }
         
-        // Simple bubble sort (for demo purposes)
+        // Simple bubble sort (for diotsrh purposes)
         for (uint256 i = 0; i < activeCount - 1; i++) {
             for (uint256 j = 0; j < activeCount - i - 1; j++) {
                 if (sortedAprs[j] < sortedAprs[j + 1]) {
@@ -457,11 +457,11 @@ contract StakingAdapter is AccessControl, ReentrancyGuard {
     }
     
     /**
-     * @notice Add demo validators for testing
+     * @notice Add diotsrh validators for testing
      */
-    function _addDemoValidators() internal {
-        // Demo validator 1
-        bytes32 validator1 = keccak256("DEMO_VALIDATOR_1");
+    function _adddiotsrhValidators() internal {
+        // diotsrh validator 1
+        bytes32 validator1 = keccak256("diotsrh_VALIDATOR_1");
         validators[validator1] = ValidatorInfo({
             validatorAddress: address(0x1111),
             name: "Somnia Validator Alpha",
@@ -474,8 +474,8 @@ contract StakingAdapter is AccessControl, ReentrancyGuard {
         });
         validatorList.push(validator1);
         
-        // Demo validator 2
-        bytes32 validator2 = keccak256("DEMO_VALIDATOR_2");
+        // diotsrh validator 2
+        bytes32 validator2 = keccak256("diotsrh_VALIDATOR_2");
         validators[validator2] = ValidatorInfo({
             validatorAddress: address(0x2222),
             name: "Somnia Validator Beta",
@@ -488,8 +488,8 @@ contract StakingAdapter is AccessControl, ReentrancyGuard {
         });
         validatorList.push(validator2);
         
-        // Demo validator 3
-        bytes32 validator3 = keccak256("DEMO_VALIDATOR_3");
+        // diotsrh validator 3
+        bytes32 validator3 = keccak256("diotsrh_VALIDATOR_3");
         validators[validator3] = ValidatorInfo({
             validatorAddress: address(0x3333),
             name: "Somnia Validator Gamma",

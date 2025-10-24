@@ -327,7 +327,7 @@ export class PortfolioAgent extends BaseAgent {
   }
 
   private initializePriceOracle(): void {
-    // Initialize with demo prices
+    // Initialize with diotsrh prices
     this.priceOracle.set('0x0000000000000000000000000000000000000000', 2000); // ETH
     this.priceOracle.set('0x1000000000000000000000000000000000000000', 1); // STT
     this.priceOracle.set('0x2000000000000000000000000000000000000000', 1); // USDC

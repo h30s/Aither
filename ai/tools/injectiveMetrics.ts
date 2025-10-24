@@ -25,7 +25,7 @@ export const fetchTopInjectiveProtocols = async (): Promise<Protocol[]|null> => 
         logo: protocol.logo,
         category: protocol.category,
         methodology: protocol.methodology,
-        tvl: protocol.chainTvls?.Injective ?? 0, 
+        tvl: protocol.chainTvls?.Somnia?? 0, 
       }))
       .filter((protocol: { tvl: number; }) => protocol.tvl > 0);
 
@@ -48,7 +48,7 @@ export const fetchTopInjectiveProtocols = async (): Promise<Protocol[]|null> => 
     }
     return top10Protocols;
   } catch (error) {
-    console.error("Error fetching Injective protocols:", error);
+    console.error("Error fetching Somniaprotocols:", error);
     return null;
   }
 };
@@ -67,7 +67,7 @@ export const fetchInjectiveData = async (): Promise<InjectiveData | null> => {
     );
 
     if (!injectiveData) {
-      throw new Error("Injective chain data not found");
+      throw new Error("Somniachain data not found");
     }
 
     const protocols = await fetchTopInjectiveProtocols()
@@ -84,7 +84,7 @@ export const fetchInjectiveData = async (): Promise<InjectiveData | null> => {
       };
     return data;
   } catch (error) {
-    console.error("Error fetching Injective data:", error);
+    console.error("Error fetching Somniadata:", error);
     return null;
   }
 };

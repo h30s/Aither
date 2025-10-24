@@ -103,7 +103,7 @@ async function main() {
       executionProxyAddress
     );
 
-    // Set up some demo validators (if not already done in constructor)
+    // Set up some diotsrh validators (if not already done in constructor)
     console.log("Verifying validator setup...");
     try {
       const validators = await stakingAdapter.getActiveValidators();
@@ -156,7 +156,7 @@ async function main() {
     console.log("\n📚 Next steps:");
     console.log("1. Update your .env.local file with the contract addresses above");
     console.log("2. Verify contracts on Somnia Explorer (if verification is available)");
-    console.log("3. Test the deployment with the provided demo flows");
+    console.log("3. Test the deployment with the provided diotsrh flows");
     console.log("4. Set up monitoring and alerts for your contracts");
     
     console.log(`\n🔗 View contracts on Somnia Explorer:`);

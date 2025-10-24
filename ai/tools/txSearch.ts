@@ -11,7 +11,7 @@ export const txSearch = {
     execute: async (txHash: string, chatHistory: any[]): Promise<string> => {
       try {
         if (!txHash || txHash.length !== 64 || !/^[A-Fa-f0-9]{64}$/.test(txHash)) {
-          return "❌ Invalid transaction hash. Please provide a valid Injective TX hash.";
+          return "❌ Invalid transaction hash. Please provide a valid SomniaTX hash.";
         }
   
         const transaction = await indexerRestExplorerApi.fetchTransaction(txHash);
@@ -43,7 +43,7 @@ export const txSearch = {
         let explanation;
         try {
           explanation = await queryOpenRouter(
-            `Look at the following Injective transaction details and explain clearly what happened:\n\n${JSON.stringify(messages, null, 2)}`,
+            `Look at the following Somniatransaction details and explain clearly what happened:\n\n${JSON.stringify(messages, null, 2)}`,
             chatHistory
           );
         } catch (error) {

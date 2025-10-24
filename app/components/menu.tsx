@@ -60,7 +60,7 @@ const Menu = ({
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
 
   function createTweetAndRedirect(refCode: string) {
-    const tweetText = `I'm using @jectadotai on Early Access right now ! Use my referal code to get your early access too.\n\nMy ref code : ${refCode} .\n\nTry it now ! https://www.jectadotai.com`;
+    const tweetText = `I'm using @Aither on Early Access right now ! Use my referal code to get your early access too.\n\nMy ref code : ${refCode} .\n\nTry it now ! https://www.aither.com`;
     const twitterBaseUrl = "https://twitter.com/intent/tweet";
     const encodedTweet = encodeURIComponent(tweetText);
     const tweetUrl = `${twitterBaseUrl}?text=${encodedTweet}`;
@@ -118,7 +118,7 @@ const Menu = ({
           {!isCollapsed && (
             <div>
               <h1 className="text-xl font-bold">Aither</h1>
-              <span className="text-xs text-gray-400">v0.0.3</span>
+              {/* <span className="text-xs text-gray-400">v0.0.3</span> */}
             </div>
           )}
         </div>
@@ -129,7 +129,7 @@ const Menu = ({
             {!isCollapsed && "New Chat"}
           </Button>
 
-          <Link href="https://jecta.gitbook.io/jecta" passHref target="_blank">
+          <Link href="https://aither.gitbook.io/aither" passHref target="_blank">
             <Button variant="ghost" className="w-full justify-start">
               <FileText className="h-4 w-4 mr-2" />
               {!isCollapsed && "Docs"}
@@ -244,7 +244,7 @@ const Menu = ({
         </ScrollArea>
       </div>
 
-      <div className="p-4 text-sm text-gray-500">{!isCollapsed && "@jectadotai"}</div>
+      <div className="p-4 text-sm text-gray-500">{!isCollapsed && "@Aither"}</div>
     </div>
   );
 

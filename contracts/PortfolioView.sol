@@ -48,7 +48,7 @@ contract PortfolioView {
         bool isProfit;
     }
     
-    // Price feeds (mock for demo - in production would use Chainlink or similar)
+    // Price feeds (mock for diotsrh - in production would use Chainlink or similar)
     mapping(address => uint256) public tokenPrices; // Token => Price in USD (scaled by 1e8)
     mapping(address => string) public tokenSymbols;
     mapping(address => uint8) public tokenDecimals;
@@ -60,7 +60,7 @@ contract PortfolioView {
     // Staking adapter reference
     StakingAdapter public stakingAdapter;
     
-    // Historical data storage (simplified for demo)
+    // Historical data storage (simplified for diotsrh)
     mapping(address => mapping(uint256 => uint256)) public dailyValues; // user => day => value
     mapping(address => uint256) public lastUpdateDay;
     
@@ -70,7 +70,7 @@ contract PortfolioView {
     
     constructor(address _stakingAdapter) {
         stakingAdapter = StakingAdapter(_stakingAdapter);
-        _initializeDemoTokens();
+        _initializediotsrhTokens();
     }
     
     /**
@@ -411,9 +411,9 @@ contract PortfolioView {
     }
     
     /**
-     * @notice Initialize demo tokens for testing
+     * @notice Initialize diotsrh tokens for testing
      */
-    function _initializeDemoTokens() internal {
+    function _initializediotsrhTokens() internal {
         // ETH (native token represented as address(0))
         supportedTokens.push(address(0));
         isSupportedToken[address(0)] = true;
@@ -431,20 +431,20 @@ contract PortfolioView {
             tokenPrices[sttToken] = 100000000; // $1 USD
         }
         
-        // Demo Token 1 (could be USDC equivalent)
-        address demoToken1 = address(0x1000);
-        supportedTokens.push(demoToken1);
-        isSupportedToken[demoToken1] = true;
-        tokenSymbols[demoToken1] = "USDC";
-        tokenDecimals[demoToken1] = 6;
-        tokenPrices[demoToken1] = 100000000; // $1 USD
+        // diotsrh Token 1 (could be USDC equivalent)
+        address diotsrhToken1 = address(0x1000);
+        supportedTokens.push(diotsrhToken1);
+        isSupportedToken[diotsrhToken1] = true;
+        tokenSymbols[diotsrhToken1] = "USDC";
+        tokenDecimals[diotsrhToken1] = 6;
+        tokenPrices[diotsrhToken1] = 100000000; // $1 USD
         
-        // Demo Token 2 (could be WBTC equivalent)
-        address demoToken2 = address(0x2000);
-        supportedTokens.push(demoToken2);
-        isSupportedToken[demoToken2] = true;
-        tokenSymbols[demoToken2] = "WBTC";
-        tokenDecimals[demoToken2] = 8;
-        tokenPrices[demoToken2] = 4500000000000; // $45,000 USD
+        // diotsrh Token 2 (could be WBTC equivalent)
+        address diotsrhToken2 = address(0x2000);
+        supportedTokens.push(diotsrhToken2);
+        isSupportedToken[diotsrhToken2] = true;
+        tokenSymbols[diotsrhToken2] = "WBTC";
+        tokenDecimals[diotsrhToken2] = 8;
+        tokenPrices[diotsrhToken2] = 4500000000000; // $45,000 USD
     }
 }

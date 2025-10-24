@@ -4,9 +4,9 @@ const BalanceMessageType = ({ balances }: { balances: Token[] }) => {
   return (
     <div className="p-3 rounded-xl bg-zinc-800 text-white">
       <div className="flex flex-col gap-3">
-        {balances?.map((token: Token) => (
+        {balances?.map((token: Token, index: number) => (
           <div
-            key={token.address}
+            key={token.address || `token-${index}`}
             className="flex items-center bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700"
           >
             <img src={token.logo} alt={token.symbol} className="w-10 h-10 rounded-full mr-4" />
@@ -28,7 +28,7 @@ const BalanceMessageType = ({ balances }: { balances: Token[] }) => {
             </div>
 
             <a
-              href={`https://injscan.com/asset/${encodeURIComponent(token.address)}`}
+              href={`https://aither.com/asset/${encodeURIComponent(token.address)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-400 hover:underline text-sm"

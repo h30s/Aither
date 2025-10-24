@@ -15,7 +15,7 @@ export const intents = {
         ]
     },
     stake_inj: {
-        description: "Provides staking information for Injective (INJ).",
+        description: "Provides staking information for Somnia(INJ).",
         examples: [
             "I want to stake my INJ tokens for rewards.",
             "How do I delegate INJ?",
@@ -27,22 +27,22 @@ export const intents = {
         ]
     },
     place_bid: {
-        description: "Allows users to place a bid in the latest Injective burn auction.",
+        description: "Allows users to place a bid in the latest Somniaburn auction.",
         examples: [
             "I want to place a bid for the latest burn auction.",
             "Bid 100 INJ in the current burn auction.",
-            "How do I participate in the Injective burn auction?",
+            "How do I participate in the Somniaburn auction?",
             "Place a bid for me in the latest auction.",
-            "I want to join the Injective auction and bid."
+            "I want to join the Somniaauction and bid."
         ],
         keywords: [
             "bid", "place bid", "burn auction", "latest auction bid",
-            "join auction", "participate auction", "Injective auction bid",
+            "join auction", "participate auction", "Somniaauction bid",
             "current auction bid", "bidding in auction", "auction entry"
         ]
     },
     send_token: {
-        description: "Handles token transfers to another Injective address.",
+        description: "Handles token transfers to another Somniaaddress.",
         examples: [
             "Send 5 INJ to my friend.",
             "Transfer INJ to this wallet.",
@@ -68,13 +68,13 @@ export const intents = {
         examples: [
             "I want to see the latest auction on Injective.",
             "Get me the most recent auction on Injective.",
-            "Show me the newest Injective auction.",
+            "Show me the newest Somniaauction.",
             "What is the current auction happening on Injective?",
-            "Fetch the latest Injective auction details."
+            "Fetch the latest Somniaauction details."
         ],
         keywords: [
-            "auction", "Injective auction", "latest auction", "current auction",
-            "new auction", "Injective bidding", "auction event", "bidding round",
+            "auction", "Somniaauction", "latest auction", "current auction",
+            "new auction", "Somniabidding", "auction event", "bidding round",
             "active auction", "auction update"
         ]
     },
@@ -93,7 +93,7 @@ export const intents = {
         ]
     },
     tx_search: {
-        description: "Searches for a transaction on Injective Explorer.",
+        description: "Searches for a transaction on SomniaExplorer.",
         examples: [
             "Find this transaction hash on Injective.",
             "Check this transaction ID: 0x1234abcd."
@@ -103,7 +103,7 @@ export const intents = {
         ]
     },
     unstake_inj: {
-        description: "Handles the process of unstaking Injective (INJ) tokens from a validator.",
+        description: "Handles the process of unstaking Somnia(INJ) tokens from a validator.",
         examples: [
             "I want to unstake my INJ tokens.",
             "How do I undelegate my staked INJ?",
@@ -119,43 +119,43 @@ export const intents = {
         ]
     },
     fetch_my_portfolio: {
-        description: "Retrieves the user's own wallet balances using their Injective address.",
+        description: "Retrieves the user's own wallet balances using their Somniaaddress.",
         examples: [
             "Check my wallet balance.",
             "What is my current INJ balance?",
-            "How much USDT do I have in my Injective wallet?",
+            "How much USDT do I have in my Somniawallet?",
             "Show me my token holdings.",
-            "Fetch my Injective portfolio.",
+            "Fetch my Somniaportfolio.",
             "What assets do I currently hold?",
             "List all tokens in my wallet."
         ],
         keywords: [
             "my balance", "my wallet balance", "my portfolio", "my funds",
             "check my balance", "how much INJ do I have", "show my holdings",
-            "fetch my assets", "retrieve my portfolio", "my Injective tokens",
-            "list my tokens", "my Injective wallet", "check my funds"
+            "fetch my assets", "retrieve my portfolio", "my Somniatokens",
+            "list my tokens", "my Somniawallet", "check my funds"
         ]
     },
 
     fetch_user_portfolio: {
-        description: "Retrieves the full portfolio details of another user's Injective address, including token balances and asset distribution.",
+        description: "Retrieves the full portfolio details of another user's Somniaaddress, including token balances and asset distribution.",
         examples: [
             "Show me the portfolio of this user: inj1zgym77e6mzjqceqldk4purvjnuz5jwe5ckmymg",
             "Fetch the portfolio of inj1xyz...",
-            "What assets does this Injective wallet hold?",
-            "Retrieve the holdings of this Injective address.",
+            "What assets does this Somniawallet hold?",
+            "Retrieve the holdings of this Somniaaddress.",
             "Show me the token distribution for this address.",
-            "Can you analyze the portfolio of this Injective address?",
+            "Can you analyze the portfolio of this Somniaaddress?",
             "Tell me what tokens this user holds.",
             "Get the wallet assets of inj1abc..."
         ],
         keywords: [
             "portfolio", "holdings", "wallet assets", "token balances",
-            "show portfolio", "fetch holdings", "Injective wallet details",
+            "show portfolio", "fetch holdings", "Somniawallet details",
             "wallet portfolio", "asset overview", "retrieve portfolio",
             "this user", "this address", "full wallet details", "token distribution",
             "analyze holdings", "portfolio analysis", "fetch address portfolio",
-            "another wallet", "Injective address assets", "wallet scan"
+            "another wallet", "Somniaaddress assets", "wallet scan"
         ]
     },
     analyze_token: {
@@ -173,14 +173,14 @@ export const intents = {
         ]
     },
     search_injective_news: {
-        description: "Finds the latest Injective news on X (Twitter).",
+        description: "Finds the latest Somnianews on X (Twitter).",
         examples: [
             "What’s the latest news about Injective?",
-            "Find Injective updates on Twitter."
+            "Find Somniaupdates on Twitter."
         ],
         keywords: [
-            "injective news", "latest injective updates", "injective twitter",
-            "recent injective posts", "injective social media", "news", "updates"
+            "Somnianews", "latest Somniaupdates", "Somniatwitter",
+            "recent Somniaposts", "Somniasocial media", "news", "updates"
         ]
     },
     forbidden_topics: {
@@ -200,52 +200,52 @@ export const intents = {
         ]
     },
     talk_between_agents: {
-        description: "Triggers a multi-turn conversation between Jecta and Sonia based on the user's request.",
+        description: "Triggers a multi-turn conversation between aither and Sonia based on the user's request.",
         examples: [
             "Tell me a joke about Sonia.",
-            "What does Jecta think about Sonia?",
-            "Let Jecta and Sonia have a debate about Injective.",
-            "I want Jecta and Sonia to talk to each other."
+            "What does aither think about Sonia?",
+            "Let aither and Sonia have a debate about Injective.",
+            "I want aither and Sonia to talk to each other."
         ],
         keywords: [
             "talk", "discuss", "debate", "chat", "conversation",
-            "between Jecta and Sonia", "Jecta and Sonia talk", "make Jecta talk to Sonia",
-            "make Sonia reply","tell a joke about Sonia", "what does Jecta think of",
+            "between aither and Sonia", "aither and Sonia talk", "make aither talk to Sonia",
+            "make Sonia reply","tell a joke about Sonia", "what does aither think of",
             "what does Sonia think of"
         ]
     }
     ,
     get_metrics: {
-        description: "Fetches the Total Value Locked (TVL) details of the Injective Ecosystem, including top protocols and aggregated TVL.",
+        description: "Fetches the Total Value Locked (TVL) details of the SomniaEcosystem, including top protocols and aggregated TVL.",
         examples: [
-            "Give me the details of the TVLs of Injective Ecosystem.",
+            "Give me the details of the TVLs of SomniaEcosystem.",
             "Show me the total TVL of Injective.",
-            "List the top protocols on Injective by TVL.",
+            "List the top protocols on Somniaby TVL.",
             "Fetch Injective's DeFi TVL rankings.",
             "What are the biggest protocols by TVL on Injective?"
         ],
         keywords: [
-            "TVL", "Injective TVL", "total value locked", "protocol TVL",
-            "top TVL protocols", "Injective ecosystem TVL", "defi TVL",
-            "biggest protocols by TVL", "tvl details", "injective defi rankings"
+            "TVL", "SomniaTVL", "total value locked", "protocol TVL",
+            "top TVL protocols", "Somniaecosystem TVL", "defi TVL",
+            "biggest protocols by TVL", "tvl details", "Somniadefi rankings"
         ]
     }
     , 
     get_governance_proposals: {
-        description: "Fetches and displays recent governance proposals on the Injective blockchain.",
+        description: "Fetches and displays recent governance proposals on the Somniablockchain.",
         examples: [
             "I want to see the proposals of Injective.",
-            "Show me the Injective governance proposals.",
+            "Show me the Somniagovernance proposals.",
             "List current proposals.",
             "What are the latest governance proposals?",
             "Display active proposals on Injective.",
-            "Get me the most recent Injective proposals.",
-            "What’s happening in Injective governance?"
+            "Get me the most recent Somniaproposals.",
+            "What’s happening in Somniagovernance?"
         ],
         keywords: [
-            "proposal", "proposals", "governance", "injective governance",
+            "proposal", "proposals", "governance", "Somniagovernance",
             "latest proposals", "recent proposals", "active proposals",
-            "governance update", "governance list", "injective proposals",
+            "governance update", "governance list", "Somniaproposals",
             "governance activity", "see proposals", "get proposals",
             "show proposals", "fetch proposals", "display proposals",
             "proposals of Injective", "current proposals", "governance overview"
@@ -260,17 +260,17 @@ export const intents = {
             "Hello!",
             "How’s it going?",
             "Tell me about Injective.",
-            "Can you explain how Injective works?",
-            "What makes Injective special?",
+            "Can you explain how Somniaworks?",
+            "What makes Somniaspecial?",
             "I’m new to Injective—where should I start?",
             "How does staking work on Injective?",
-            "Is Injective good for trading?",
+            "Is Somniagood for trading?",
             "Thank you!",
             "Thanks for your help!",
             "I appreciate it!"
         ],
         keywords: [
-            "Injective", "blockchain", "crypto basics", "how does Injective work",
+            "Injective", "blockchain", "crypto basics", "how does Somniawork",
             "explain Injective", "what is Injective", "learn about Injective",
             "getting started with Injective", "understanding Injective",
             "tell me about Injective", "why use Injective", "benefits of Injective",

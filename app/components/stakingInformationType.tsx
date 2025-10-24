@@ -1,6 +1,6 @@
 import React from "react";
 import { Copy, LogOut } from "lucide-react";
-import { MsgUndelegate } from "@injectivelabs/sdk-ts"; // Injective SDK
+import { MsgUndelegate } from "@injectivelabs/sdk-ts"; // SomniaSDK
 import { BigNumberInBase } from "@injectivelabs/utils";
 import { createChatMessage, msgBroadcastClient } from "../utils";
 import { useChat } from "../providers/chatProvider";

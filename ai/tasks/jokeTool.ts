@@ -1,5 +1,5 @@
 import { createChatMessage } from "@/app/utils";
-import { queryJectaJoke } from "../ai";
+import { queryaitherJoke } from "../ai";
 import { querySoniaJoke } from "../sonia";
 
 export async function jokeTool(
@@ -15,21 +15,21 @@ export async function jokeTool(
 
     for (let i = 0; i < randNumber; i++) {
         
-        const jectaResponse = await queryJectaJoke(latestMessage, messages);
-        messages.push({ sender: "jecta", text: jectaResponse });
+        const aitherResponse = await queryaitherJoke(latestMessage, messages);
+        messages.push({ sender: "aither", text: aitherResponse });
 
         addToChat(
             createChatMessage({
                 sender: "ai",
-                text: jectaResponse,
+                text: aitherResponse,
                 type: "text",
                 intent: intent,
             })
         );
 
         
-        if (jectaResponse) {
-            const soniaResponse = await querySoniaJoke(jectaResponse, messages);
+        if (aitherResponse) {
+            const soniaResponse = await querySoniaJoke(aitherResponse, messages);
             messages.push({ sender: "sonia", text: soniaResponse });
 
             addToChat(

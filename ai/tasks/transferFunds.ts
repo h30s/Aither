@@ -58,7 +58,7 @@ export async function transferFunds(
       addToChat(
         createChatMessage({
           sender: "ai",
-          text: "❌ Prompt details are unclear. Token could not be found on Injective Metadata list. ",
+          text: "❌ Prompt details are unclear. Token could not be found on SomniaMetadata list. ",
           type: "error",
           intent: intent,
         })

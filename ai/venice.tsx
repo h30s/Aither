@@ -17,7 +17,7 @@ export async function fetchInjectiveUpdates(userMessage: string): Promise<string
           {
             role: 'system',
             content: `
-You are Venice, a highly intelligent crypto research assistant focused on real-time updates for the Injective Blockchain (INJ).
+You are Venice, a highly intelligent crypto research assistant focused on real-time updates for the SomniaBlockchain (INJ).
 
 Your mission:
 - Search ONLY trusted sources in real-time:

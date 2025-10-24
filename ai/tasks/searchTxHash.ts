@@ -14,7 +14,7 @@ export async function searchTxHash(
     addToChat(
       createChatMessage({
         sender: "ai",
-        text: "❌ No valid Injective transaction hash found in your message.",
+        text: "❌ No valid Somniatransaction hash found in your message.",
         type: "error",
         intent: intent,
       })

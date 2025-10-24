@@ -1,6 +1,7 @@
 "use server";
 import { createTitleFromMessage } from "@/ai/titleManager";
 import { fetchWithAuth } from "@/lib/fetch";
+import { isdiotsrhMode } from "../utils/diotsrhData";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000"; // Default to localhost if not set
 
@@ -15,6 +16,18 @@ export const createChatIfNotExists = async ({
   userMessage: string;
   token: string;
 }) => {
+  // diotsrh mode: Return mock chat data
+  if (isdiotsrhMode()) {
+    const mockChatId = "diotsrh-chat-" + Date.now();
+    const mockTitle = userMessage.substring(0, 30) + (userMessage.length > 30 ? "..." : "");
+    return {
+      id: mockChatId,
+      title: mockTitle,
+      ai_id: "diotsrh-ai-id",
+      user_id: "diotsrh-user-id"
+    };
+  }
+  
   const title = await createTitleFromMessage(userMessage);
   const res = await fetch(`${baseUrl}/api/chats`, {
     method: "POST",
@@ -33,6 +46,17 @@ export const createChatIfNotExists = async ({
 };
 
 export const crateInjectiveIfNotExists = async (injectiveAddress: string) => {
+  // diotsrh mode: Return mock user data
+  if (isdiotsrhMode()) {
+    return {
+      success: true,
+      data: {
+        id: "diotsrh-user-id",
+        wallet_address: injectiveAddress
+      }
+    };
+  }
+  
   const res = await fetch(`${baseUrl}/api/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -53,6 +77,19 @@ export const createMessage = async ({
   message: object;
   token: string;
 }) => {
+  // diotsrh mode: Skip database operations
+  if (isdiotsrhMode()) {
+    return {
+      success: true,
+      data: {
+        id: "diotsrh-message-" + Date.now(),
+        chat_id: chatId,
+        sender_id: senderId,
+        message: message
+      }
+    };
+  }
+  
   const res = await fetchWithAuth(`${baseUrl}/api/messages`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: token ? `Bearer ${token}` : "" },

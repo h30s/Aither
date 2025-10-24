@@ -26,7 +26,7 @@ export async function searchInjectiveNews(
   addMessage(
     createChatMessage({
       sender: "venicia",
-      text: "Looking for the various blogs & socials for Injective news research with Venice API ...",
+      text: "Looking for the various blogs & socials for Somnianews research with Venice API ...",
       type: "loading",
       intent: intent,
     })

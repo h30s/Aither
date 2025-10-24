@@ -46,7 +46,7 @@ contract SwapAdapter is AccessControl, ReentrancyGuard {
     mapping(bytes32 => DexInfo) public supportedDexes;
     bytes32[] public dexList;
     
-    // Price oracle integration (mock for demo)
+    // Price oracle integration (mock for diotsrh)
     mapping(address => uint256) public tokenPrices; // Token => Price in USD (scaled by 1e8)
     
     // Slippage protection
@@ -90,8 +90,8 @@ contract SwapAdapter is AccessControl, ReentrancyGuard {
         _grantRole(EXECUTOR_ROLE, msg.sender);
         _grantRole(DEX_MANAGER_ROLE, msg.sender);
         
-        // Add a demo DEX (could be Uniswap V2/V3 style)
-        _addDemoAMM();
+        // Add a diotsrh DEX (could be Uniswap V2/V3 style)
+        _adddiotsrhAMM();
     }
     
     /**
@@ -244,9 +244,9 @@ contract SwapAdapter is AccessControl, ReentrancyGuard {
     ) internal returns (uint256 amountOut) {
         DexInfo memory dex = supportedDexes[dexId];
         
-        if (dexId == keccak256("DEMO_AMM")) {
-            // Demo AMM implementation
-            return _executeOnDemoAMM(params);
+        if (dexId == keccak256("diotsrh_AMM")) {
+            // diotsrh AMM implementation
+            return _executeOndiotsrhAMM(params);
         }
         
         // For other DEXes, implement specific integration logic
@@ -254,9 +254,9 @@ contract SwapAdapter is AccessControl, ReentrancyGuard {
     }
     
     /**
-     * @notice Simple demo AMM for testing
+     * @notice Simple diotsrh AMM for testing
      */
-    function _executeOnDemoAMM(SwapParams memory params) internal returns (uint256 amountOut) {
+    function _executeOndiotsrhAMM(SwapParams memory params) internal returns (uint256 amountOut) {
         // Simplified AMM logic (constant product formula)
         // In production, this would integrate with actual DEX contracts
         
@@ -317,7 +317,7 @@ contract SwapAdapter is AccessControl, ReentrancyGuard {
         address tokenOut,
         uint256 amountIn
     ) internal view returns (uint256) {
-        // Simplified calculation for demo
+        // Simplified calculation for diotsrh
         uint256 priceRatio = _getSpotPrice(tokenIn, tokenOut);
         uint256 feeRate = supportedDexes[dexId].feeRate;
         
@@ -361,17 +361,17 @@ contract SwapAdapter is AccessControl, ReentrancyGuard {
     }
     
     /**
-     * @notice Initialize demo AMM
+     * @notice Initialize diotsrh AMM
      */
-    function _addDemoAMM() internal {
-        bytes32 demoId = keccak256("DEMO_AMM");
-        supportedDexes[demoId] = DexInfo({
+    function _adddiotsrhAMM() internal {
+        bytes32 diotsrhId = keccak256("diotsrh_AMM");
+        supportedDexes[diotsrhId] = DexInfo({
             router: address(this),
             active: true,
             feeRate: 30, // 0.3%
-            name: "Demo AMM"
+            name: "diotsrh AMM"
         });
-        dexList.push(demoId);
+        dexList.push(diotsrhId);
     }
     
     /**

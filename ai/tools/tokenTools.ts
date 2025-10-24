@@ -24,7 +24,7 @@ const FACTORIES = [
   { name: "Astroport", address: "inj19aenkaj6qhymmt746av8ck4r8euthq3zmxr2r6" },
 ];
 
-const baseUrl = "https://app.jectadotai.com";
+const baseUrl = "https://app.aither.com";
 
 export async function findLiquidityPools(contract: string) {
   const dojopool = await fetchPools("DojoSwap", contract);

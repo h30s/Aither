@@ -41,7 +41,7 @@ import { dojoBurnAddress, fetchTokenMetadata, fetchVault, findLiquidityPools, ge
         addToChat(
           createChatMessage({
                   sender: "sonia",
-                  text: "❌ This token is not available on Injective Metadata list. Please try another one.",
+                  text: "❌ This token is not available on SomniaMetadata list. Please try another one.",
                   type: "error",
                   intent:intent
                 })

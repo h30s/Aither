@@ -169,7 +169,7 @@ export class TradeAgent extends BaseAgent {
       priceImpact,
       gasEstimate: 180000,
       route: [params.tokenIn, params.tokenOut],
-      dexUsed: 'Demo AMM'
+      dexUsed: 'diotsrh AMM'
     };
   }
 
@@ -245,7 +245,7 @@ export class TradeAgent extends BaseAgent {
   }
 
   private initializeSupportedTokens(): void {
-    // Initialize with demo tokens
+    // Initialize with diotsrh tokens
     this.supportedTokens.set('0x0000000000000000000000000000000000000000', {
       address: '0x0000000000000000000000000000000000000000',
       symbol: 'ETH',

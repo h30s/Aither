@@ -22,7 +22,7 @@ export async function stakeInjective(
   addToChat(
     createChatMessage({
       sender: "ai",
-      text: "🔍 Fetching current Injective validators...",
+      text: "🔍 Fetching current Somniavalidators...",
       type: "loading",
     })
   );

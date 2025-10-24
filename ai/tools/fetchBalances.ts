@@ -98,7 +98,7 @@ export const fetchInjectiveBalance = async (injectiveAddress: string) => {
       cw20: await Promise.all(formattedCW20),
     };
   } catch (error) {
-    console.error("❌ Error fetching Injective balance:", error);
+    console.error("❌ Error fetching Somniabalance:", error);
     return null;
   }
 };

@@ -1,8 +1,14 @@
+import { isdiotsrhMode } from "../utils/diotsrhData";
+
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
 
 const getAuthToken = () =>  localStorage.getItem("token");
 
 const getLastChatNames = async (injectiveAddress: string) => {
+  // diotsrh mode: Return empty chat list
+  if (isdiotsrhMode()) {
+    return [];
+  }
   const token = getAuthToken();
 
   const response = await fetch(`${baseUrl}/api/chats`, {
@@ -20,6 +26,11 @@ const getLastChatNames = async (injectiveAddress: string) => {
 };
 
 const getChatHistory = async (chatId: string) => {
+  // diotsrh mode: Return empty chat history
+  if (isdiotsrhMode()) {
+    return [];
+  }
+  
   const token = getAuthToken();
 
   const response = await fetch(`${baseUrl}/api/chats/${chatId}`, {

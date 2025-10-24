@@ -1,6 +1,7 @@
 
 "use server"
 import type { ChatMessage } from "../types";
+import { getdiotsrhResponse, shouldUsediotsrhMode } from "./diotsrhService";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
 
@@ -11,7 +12,12 @@ export const fetchResponse = async (
   token:string
 ) => {
   
+  // diotsrh Mode: Return mock responses
+  if (shouldUsediotsrhMode()) {
+    return await getdiotsrhResponse(userMessage, chatHistory);
+  }
 
+  // Real API call
   const res = await fetch(`${baseUrl}/api/chat`, {
     method: "POST",
     headers: {

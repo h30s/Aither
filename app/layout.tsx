@@ -6,7 +6,7 @@ import MenuProvider from "./providers/menuProvider";
 import { Analytics } from "@vercel/analytics/react";
 export const metadata: Metadata = {
   title: "Aither",
-  description: "First open-source AI copilot built on Injective Blockchain",
+  description: "First open-source AI copilot built on SomniaBlockchain",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

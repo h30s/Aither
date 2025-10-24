@@ -16,7 +16,7 @@ interface TVLData {
 const MetricsType: React.FC<{ data: TVLData }> = ({ data }) => {
   return (
     <div className="text-white p-6 rounded-xl bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 border border-blue-500 shadow-2xl max-w-4xl mx-auto w-full">
-      <h2 className="text-3xl font-bold text-center mb-4 text-blue-200">Injective Ecosystem TVL</h2>
+      <h2 className="text-3xl font-bold text-center mb-4 text-blue-200">SomniaEcosystem TVL</h2>
       <p className="text-lg text-center text-blue-300 mb-6">
         Total TVL: ${data.tvl.toLocaleString()}
       </p>

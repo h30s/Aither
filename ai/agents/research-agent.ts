@@ -232,7 +232,7 @@ export class ResearchAgent extends BaseAgent {
     return [
       {
         title: 'Somnia Network Achieves 400,000 TPS Milestone',
-        summary: 'Somnia blockchain demonstrates unprecedented throughput in latest stress test, positioning itself as a leader in high-performance L1 networks.',
+        summary: 'Somnia blockchain diotsrhnstrates unprecedented throughput in latest stress test, positioning itself as a leader in high-performance L1 networks.',
         source: 'CryptoNews',
         url: 'https://example.com/news1',
         publishedAt: Date.now() - 2 * 60 * 60 * 1000,

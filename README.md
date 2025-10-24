@@ -175,7 +175,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-## 🎬 Demo Flows
+## 🎬 diotsrh Flows
 
 ### 1. "Stake 100 STT with the best validator"
 - Router LLM parses intent and identifies staking requirement

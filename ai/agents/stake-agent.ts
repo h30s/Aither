@@ -302,7 +302,7 @@ export class StakeAgent extends BaseAgent {
   }
 
   private initializeValidators(): void {
-    // Initialize with demo validators
+    // Initialize with diotsrh validators
     this.validators.set('validator_1', {
       id: 'validator_1',
       name: 'Somnia Validator Alpha',

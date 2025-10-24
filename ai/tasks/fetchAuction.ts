@@ -84,7 +84,7 @@ export async function getAuction(
             addToChat(
               createChatMessage({
                 sender: "ai",
-                text: "Auction Could Not be fetched from Injective TS SDK. Try another round maybe. Tool Closed.",
+                text: "Auction Could Not be fetched from SomniaTS SDK. Try another round maybe. Tool Closed.",
                 type: "text",
                 intent: intent,
               })

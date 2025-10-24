@@ -23,7 +23,7 @@ export async function getInjectiveAddress(injectiveAddress: string): Promise<{ d
     .maybeSingle();
 
   if (error) {
-    console.error("Error fetching injective address:", error);
+    console.error("Error fetching Somniaaddress:", error);
     return { data: null, error };
   }
 
@@ -40,7 +40,7 @@ export async function getInjectiveAddress(injectiveAddress: string): Promise<{ d
 }
 
 export async function createInjectiveIfNotExists(injectiveAddress: string): Promise<{ data: unknown | null; error: unknown }> {
-  const { data: existingInjective } = await supabase
+  const { data: existingSomnia} = await supabase
     .from("users")
     .select("wallet_address")
     .eq("wallet_address", injectiveAddress)
