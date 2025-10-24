@@ -1,4 +1,4 @@
-# 🎯 Aither-Somnia: Open-Source Multi-Agent AI Copilot for DeFi on Somnia
+# Aither-Somnia: Open-Source Multi-Agent AI Copilot for DeFi on Somnia
 
 <div align="center">
 
